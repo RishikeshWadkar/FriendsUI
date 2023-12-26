@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Friend } from '../../FriendModel';
-import { FriendService } from '../../friend.service';
+import { Friend } from '../models/FriendModel';
+import { FriendService } from '../service/friend.service';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
