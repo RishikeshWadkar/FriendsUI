@@ -1,0 +1,29 @@
+<table id="friends">
+    <div *ngIf="friends.length > 0; then friendsAreThere else friendsIsEmpty"></div>
+    <ng-template #friendsAreThere>
+        <h1 class="friends_heading">All your Friends</h1>
+        <tr>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Country</th>
+            <th>Net Worth</th>
+            <th>DOB</th>
+            <th>Department</th>
+        </tr>
+        <tr *ngFor="let friend of friends">
+            <td>{{friend.id}} </td>
+            <td>{{friend.firstName}} </td>
+            <td>{{friend.lastName}}</td>
+            <td>{{friend.email}}</td>
+            <td>{{friend.country | uppercase}}</td>
+            <td>{{friend.netWorth | currency: 'INR'}}</td>
+            <td>{{friend.dob | date: 'MMM d, y'}}</td>
+            <td>{{friend.department}}</td>
+        </tr>
+    </ng-template>
+    <ng-template #friendsIsEmpty>
+        <h2 class="sad-nofriends">You don't have any friends ☹</h2>
+    </ng-template>
+</table>
