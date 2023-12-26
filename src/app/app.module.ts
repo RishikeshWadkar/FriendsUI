@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FriendComponent } from './Custom/friend/friend.component';
 import { FriendService } from './friend.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, provideHttpClient, withFetch} from '@angular/common/http';
 import { AgePipe } from './age.pipe';
 import { HomeComponent } from './Custom/home/home.component';
 import { ProfileComponent } from './Custom/profile/profile.component';
@@ -27,7 +27,8 @@ import { AboutComponent } from './Custom/about/about.component';
   ],
   providers: [
     provideClientHydration(),
-    FriendService
+    FriendService,
+    provideHttpClient(withFetch())
   ],
   bootstrap: [AppComponent]
 })
