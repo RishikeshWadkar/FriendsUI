@@ -5,4 +5,6 @@ export class Friend {
 	department!: string;
 	email!: string;
 	country!: string;
+	netWorth!: number;
+	dob!: string;
 }
