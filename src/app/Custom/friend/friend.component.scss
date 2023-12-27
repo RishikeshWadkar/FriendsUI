@@ -69,20 +69,49 @@
     transition-duration: 0.4s;
 }
 
-.container {  
+.container {
     margin-top: 40px;
     position: relative;
-  }
-  
-  .center {
+}
+
+.center {
     margin: 0;
     position: absolute;
     top: 50%;
     left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-  }
+}
 
 .add_friend:hover {
     box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+
+.delete_button {
+    background-color: rgb(255, 0, 0);
+    border: none;
+    color: white;
+    padding: 12px 16px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Darker background on mouse-over */
+.delete_button:hover {
+    background-color: rgb(99, 0, 0);
+}
+
+.edit_button {
+    background-color: rgb(0, 140, 255);
+    border: none;
+    color: white;
+    padding: 12px 16px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Darker background on mouse-over */
+.edit_button:hover {
+    background-color: rgb(0, 93, 130);
 }

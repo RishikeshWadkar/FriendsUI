@@ -52,6 +52,11 @@
             && getfriendForm.email.errors.required">
             <small>email is required</small>
         </div>
+        <div *ngIf="getfriendForm.email.errors 
+            && getfriendForm.email.touched 
+            && getfriendForm.email.errors.email">
+            <small>Please provide a valid email id</small>
+        </div>
 
         <div *ngIf="getfriendForm.netWorth.errors 
             && getfriendForm.netWorth.touched 

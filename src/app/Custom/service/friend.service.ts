@@ -17,4 +17,12 @@ export class FriendService {
   public setFriends(friend: Friend): Observable<Friend> {
     return this.httpClient.post<Friend>('http://localhost:9001/friends/addnew', friend);
   }
+
+  public deleteFriendByID(id: number): Observable<any> {
+    return this.httpClient.delete('http://localhost:9001/friends/' + id + '/delete');
+  }
+  
+  public editFriend(friend: Friend): Observable<Friend> {
+    return this.httpClient.put<Friend>('http://localhost:9001/friends/' + friend.id + '/edit', friend);
+  }
 }

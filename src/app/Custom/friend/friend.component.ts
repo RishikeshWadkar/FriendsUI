@@ -3,7 +3,8 @@ import { Friend } from '../models/FriendModel';
 import { FriendService } from '../service/friend.service';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-friend',
@@ -13,18 +14,38 @@ import { Router } from '@angular/router';
 export class FriendComponent implements OnInit {
 
 
-  constructor(private friendService: FriendService, private router: Router) { }
+  constructor(private friendService: FriendService,
+    private router: Router,
+    private formBuilder: FormBuilder,
+    activatedRoute: ActivatedRoute) { }
 
   friends: Friend[] = [];
+  addFriendForm?: FormGroup;
 
   ngOnInit() {
-    this.friendService.getFriends()
-      .subscribe(data => {
-        this.friends = data;
-      });
+    this.subscribeToFriends();
   }
 
   onAddFriendClick() {
     this.router.navigate(['/friends/add']);
+  }
+
+  onEditFriendClick(friend: Friend) {
+    this.friendService.editFriend(friend).subscribe((data: Friend) => {
+      this.router.navigate(['/friends/add'], { state: { friendData: friend } });
+    })
+  }
+
+  onDeleteFriendClick(id: number) {
+    this.friendService.deleteFriendByID(id).subscribe((data: Friend) => {
+      this.subscribeToFriends();
+    })
+  }
+
+  public subscribeToFriends() {
+    this.friendService.getFriends()
+      .subscribe(data => {
+        this.friends = data;
+      });
   }
 }
