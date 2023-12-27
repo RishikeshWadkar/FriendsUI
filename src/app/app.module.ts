@@ -10,6 +10,8 @@ import { AgePipe } from './age.pipe';
 import { HomeComponent } from './Custom/home/home.component';
 import { ProfileComponent } from './Custom/profile/profile.component';
 import { AboutComponent } from './Custom/about/about.component';
+import { FriendFormComponent } from './Custom/friend-form/friend-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,12 +20,14 @@ import { AboutComponent } from './Custom/about/about.component';
     AgePipe,
     HomeComponent,
     ProfileComponent,
-    AboutComponent
+    AboutComponent,
+    FriendFormComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [
     provideClientHydration(),

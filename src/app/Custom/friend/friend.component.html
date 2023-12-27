@@ -1,4 +1,4 @@
-<ng-container *ngIf="friends.length > 0; then friendsAreThere else friendsIsEmpty"></ng-container>
+<ng-container *ngIf="friends!.length > 0; then friendsAreThere else friendsIsEmpty"></ng-container>
 <ng-template #friendsAreThere>
     <h1 class="friends_heading">All your Friends</h1>
     <table id="friends">
@@ -27,3 +27,8 @@
 <ng-template #friendsIsEmpty>
     <h2 class="sad-nofriends">You don't have any friends ☹</h2>
 </ng-template>
+<div class="container">
+    <div class="center">
+        <button class="button add_friend" (click)="onAddFriendClick()">Add a Friend</button>
+    </div>
+</div>

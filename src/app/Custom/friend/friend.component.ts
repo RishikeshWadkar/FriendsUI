@@ -3,6 +3,7 @@ import { Friend } from '../models/FriendModel';
 import { FriendService } from '../service/friend.service';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-friend',
@@ -11,7 +12,8 @@ import { Observable } from 'rxjs';
 })
 export class FriendComponent implements OnInit {
 
-  constructor(private friendService: FriendService) { }
+
+  constructor(private friendService: FriendService, private router: Router) { }
 
   friends: Friend[] = [];
 
@@ -20,5 +22,9 @@ export class FriendComponent implements OnInit {
       .subscribe(data => {
         this.friends = data;
       });
+  }
+
+  onAddFriendClick() {
+    this.router.navigate(['/friends/add']);
   }
 }

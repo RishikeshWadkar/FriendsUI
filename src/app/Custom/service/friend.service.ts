@@ -7,10 +7,14 @@ import { Friend } from '../models/FriendModel';
   providedIn: 'root'
 })
 export class FriendService {
-  
-  constructor(private httpClient:HttpClient) { }
+
+  constructor(private httpClient: HttpClient) { }
 
   public getFriends(): Observable<Friend[]> {
     return this.httpClient.get<Friend[]>('http://localhost:9001/friends');
+  }
+
+  public setFriends(friend: Friend): Observable<Friend> {
+    return this.httpClient.post<Friend>('http://localhost:9001/friends/addnew', friend);
   }
 }
