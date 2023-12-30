@@ -1,4 +1,10 @@
-<ng-container *ngIf="friends.length > 0; then friendsAreThere else friendsIsEmpty"></ng-container>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div *ngIf="isLoading">
+    <h2 class="friends_heading">Loading...</h2>
+</div>
+
+<ng-container *ngIf="friends!.length > 0; then friendsAreThere else friendsIsEmpty"></ng-container>
 <ng-template #friendsAreThere>
     <h1 class="friends_heading">All your Friends</h1>
     <table id="friends">
@@ -11,6 +17,8 @@
             <th>Net Worth</th>
             <th>DOB</th>
             <th>Department</th>
+            <th>Edit</th>
+            <th>Delete</th>
         </tr>
         <tr *ngFor="let friend of friends">
             <td>{{friend.id}} </td>
@@ -21,9 +29,20 @@
             <td>{{friend.netWorth | currency: 'INR'}}</td>
             <td>{{friend.dob | date: 'MMM d, y'}}</td>
             <td>{{friend.department}}</td>
+            <td>
+                <button class="edit_button" (click)="onEditFriendClick(friend)"><i class="fa fa-pencil"></i></button>
+            </td>
+            <td>
+                <button class="delete_button" (click)="onDeleteFriendClick(friend.id)"><i class="fa fa-trash"></i></button>
+            </td>
         </tr>
     </table>
 </ng-template>
 <ng-template #friendsIsEmpty>
-    <h2 class="sad-nofriends">You don't have any friends ☹</h2>
+    <h2 *ngIf="!isLoading" class="sad-nofriends">You don't have any friends ☹</h2>
 </ng-template>
+<div class="container">
+    <div class="center">
+        <button *ngIf="!isLoading" class="button add_friend" (click)="onAddFriendClick()">Add a Friend</button>
+    </div>
+</div>
