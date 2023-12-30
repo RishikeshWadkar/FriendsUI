@@ -13,6 +13,7 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'about', component: AboutComponent },
   { path: 'friends/:add', component: FriendFormComponent },
+  { path: 'friends/:add/:friendData', component: FriendFormComponent },
 ];
 
 @NgModule({

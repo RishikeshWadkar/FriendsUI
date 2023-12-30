@@ -16,20 +16,23 @@ export class FriendFormComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
     private friendService: FriendService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute) { }
+    private router: Router) {
 
-  addFriendForm?: FormGroup;
-  friend: any;
-
-  ngOnInit(): void {
     this.createFriendsFrom(null);
 
-    this.activatedRoute.queryParams.subscribe((data) => {
-      console.log(data);
-      this.friend = data['queryParams'];
+    const navigation = this.router.getCurrentNavigation();
+    if (navigation && navigation.extras && navigation.extras.state) {
+      this.friend = navigation.extras.state['friendData'];
+      console.log(this.friend);
       this.createFriendsFrom(this.friend);
-    });
+    }
+
+  }
+
+  addFriendForm?: FormGroup;
+  friend!: Friend;
+
+  ngOnInit(): void {
   }
 
   get getfriendForm(): any {
@@ -50,7 +53,7 @@ export class FriendFormComponent implements OnInit {
     }
     else {
       this.addFriendForm = this.formBuilder.group({
-        firstName: new FormControl(data.dataParam.firstName, [Validators.required]),
+        firstName: new FormControl(data.firstName, [Validators.required]),
         lastName: new FormControl(data.lastName, [Validators.required]),
         email: new FormControl(data.email, [Validators.required, Validators.email]),
         country: new FormControl(data.country, [Validators.required]),
@@ -67,9 +70,18 @@ export class FriendFormComponent implements OnInit {
       return;
     }
     console.log(this.addFriendForm?.value);
-    this.friendService.setFriends(this.addFriendForm?.value).subscribe((data: Friend) => {
-      this.router.navigate(['/friends']);
-    });
+
+    if (this.friend){
+      this.friendService.editFriend(this.friend.id, this.addFriendForm?.value).subscribe((data: Friend) => {
+        this.router.navigate(['/friends']);
+      });
+    }
+    else {
+      this.friendService.setFriends(this.addFriendForm?.value).subscribe((data: Friend) => {
+        this.router.navigate(['/friends']);
+      });
+    }
+
   }
 
   // Recursive function to mark all form fields as touched

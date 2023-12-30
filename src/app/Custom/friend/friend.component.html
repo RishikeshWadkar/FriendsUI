@@ -1,4 +1,9 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div *ngIf="isLoading">
+    <h2 class="friends_heading">Loading...</h2>
+</div>
+
 <ng-container *ngIf="friends!.length > 0; then friendsAreThere else friendsIsEmpty"></ng-container>
 <ng-template #friendsAreThere>
     <h1 class="friends_heading">All your Friends</h1>
@@ -34,10 +39,10 @@
     </table>
 </ng-template>
 <ng-template #friendsIsEmpty>
-    <h2 class="sad-nofriends">You don't have any friends ☹</h2>
+    <h2 *ngIf="!isLoading" class="sad-nofriends">You don't have any friends ☹</h2>
 </ng-template>
 <div class="container">
     <div class="center">
-        <button class="button add_friend" (click)="onAddFriendClick()">Add a Friend</button>
+        <button *ngIf="!isLoading" class="button add_friend" (click)="onAddFriendClick()">Add a Friend</button>
     </div>
 </div>

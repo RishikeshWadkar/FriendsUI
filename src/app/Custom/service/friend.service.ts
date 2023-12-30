@@ -8,21 +8,26 @@ import { Friend } from '../models/FriendModel';
 })
 export class FriendService {
 
+
   constructor(private httpClient: HttpClient) { }
 
+  // http://localhost:9001
+  apiUrl: string = "https://sales-favour-weekend-pledge.trycloudflare.com";
+  
   public getFriends(): Observable<Friend[]> {
-    return this.httpClient.get<Friend[]>('http://localhost:9001/friends');
+    return this.httpClient.get<Friend[]>(this.apiUrl+'/friends');
   }
 
   public setFriends(friend: Friend): Observable<Friend> {
-    return this.httpClient.post<Friend>('http://localhost:9001/friends/addnew', friend);
+    return this.httpClient.post<Friend>(this.apiUrl+'/friends/addnew', friend);
   }
 
   public deleteFriendByID(id: number): Observable<any> {
-    return this.httpClient.delete('http://localhost:9001/friends/' + id + '/delete');
+    return this.httpClient.delete(this.apiUrl+'/friends/' + id + '/delete');
   }
   
-  public editFriend(friend: Friend): Observable<Friend> {
-    return this.httpClient.put<Friend>('http://localhost:9001/friends/' + friend.id + '/edit', friend);
+  public editFriend(id: number, friend: Friend): Observable<Friend> {
+    friend.id = id;
+    return this.httpClient.put<Friend>(this.apiUrl+'/friends/' + id + '/edit', friend);
   }
 }

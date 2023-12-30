@@ -15,12 +15,11 @@ export class FriendComponent implements OnInit {
 
 
   constructor(private friendService: FriendService,
-    private router: Router,
-    private formBuilder: FormBuilder,
-    activatedRoute: ActivatedRoute) { }
+    private router: Router) { }
 
   friends: Friend[] = [];
   addFriendForm?: FormGroup;
+  isLoading: boolean = true;
 
   ngOnInit() {
     this.subscribeToFriends();
@@ -31,9 +30,7 @@ export class FriendComponent implements OnInit {
   }
 
   onEditFriendClick(friend: Friend) {
-    this.friendService.editFriend(friend).subscribe((data: Friend) => {
-      this.router.navigate(['/friends/add'], { state: { friendData: friend } });
-    })
+    this.router.navigate(['/friends/add/friendData'], { state: { friendData: friend } });
   }
 
   onDeleteFriendClick(id: number) {
@@ -46,6 +43,7 @@ export class FriendComponent implements OnInit {
     this.friendService.getFriends()
       .subscribe(data => {
         this.friends = data;
+        this.isLoading = false;
       });
   }
 }
